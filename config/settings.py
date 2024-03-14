@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    'mptt',
+    'django_recaptcha',
 
     'account.apps.AccountConfig',
     'product.apps.ProductConfig',
