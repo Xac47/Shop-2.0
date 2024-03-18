@@ -32,3 +32,19 @@ class Category(MPTTModel):
     def save(self, *args, **kwargs):
         self.slug = f'{slugify(translit_to_eng(self.name))}'
         super().save(*args, **kwargs)
+
+
+class Brand(models.Model):
+    name = models.CharField('Название', max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, verbose_name='slug', blank=True)
+
+    class Meta:
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренды'
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = f'{slugify(translit_to_eng(self.name))}'
+        super().save(*args, **kwargs)
