@@ -97,3 +97,19 @@ class Size(models.Model):
     def save(self, *args, **kwargs):
         self.slug = f'{slugify(translit_to_eng(self.name))}'
         super().save(*args, **kwargs)
+
+
+class RAM(models.Model):
+    name = models.CharField('ОЗУ', max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, verbose_name='slug', blank=True)
+
+    class Meta:
+        verbose_name = 'ОЗУ'
+        verbose_name_plural = 'ОЗУ'
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = f'{slugify(translit_to_eng(self.name))}'
+        super().save(*args, **kwargs)
