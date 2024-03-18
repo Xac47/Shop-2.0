@@ -50,6 +50,23 @@ class Brand(models.Model):
         super().save(*args, **kwargs)
 
 
+class BrandModel(models.Model):
+    name = models.CharField('Модель', max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, verbose_name='slug', blank=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Бренд', related_name='models')
+
+    class Meta:
+        verbose_name = 'Модель'
+        verbose_name_plural = 'Модели'
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = f'{slugify(translit_to_eng(self.name))}'
+        super().save(*args, **kwargs)
+
+
 class Color(models.Model):
     name = models.CharField('Цвет', max_length=255, unique=True)
     slug = models.SlugField(max_length=255, verbose_name='slug', blank=True)
